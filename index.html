@@ -69,27 +69,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #3b82f6;
         }
-        /* Game Screen CSS styling override */
-        #game-canvas {
-            image-rendering: pixelated;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-            transition: transform 0.1s ease-out;
-        }
-        /* Arcade scanlines overlay effect */
-        .arcade-scanlines {
-            position: relative;
-            overflow: hidden;
-        }
-        .arcade-scanlines::after {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 5;
-            background-size: 100% 4px, 6px 100%;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body class="bg-brand-dark text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-blue selection:text-white">
@@ -108,12 +87,11 @@
                 </div>
                 <!-- Desktop Navigation links -->
                 <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about-me" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">About Me</a>
                     <a href="#about" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Pillars</a>
                     <a href="#skills" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Expertise</a>
                     <a href="#gallery" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Visuals</a>
                     <a href="#timeline" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Journey</a>
-                    <a href="#arcade" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Arcade</a>
-                    <a href="#quiz" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Interactive Planner</a>
                     <a href="#connect" class="text-sm font-medium px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20 hover:bg-brand-blue/20 text-brand-blue transition-all">Get in Touch</a>
                 </div>
                 <!-- Mobile Navigation Trigger -->
@@ -127,18 +105,17 @@
         <!-- Mobile Dropdown Navigation Menu -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-brand-dark/95 backdrop-blur-lg">
             <div class="px-2 pt-2 pb-4 space-y-1">
+                <a href="#about-me" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">About Me</a>
                 <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Pillars</a>
                 <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Expertise</a>
                 <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Visuals</a>
                 <a href="#timeline" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Journey</a>
-                <a href="#arcade" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Arcade</a>
-                <a href="#quiz" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Interactive Planner</a>
                 <a href="#connect" class="block px-3 py-2 rounded-md text-base font-medium text-brand-blue hover:bg-white/5">Get in Touch</a>
             </div>
         </div>
     </nav>
 
-    <header class="relative min-h-[90vh] flex items-center justify-center pt-8 pb-16 px-4 sm:px-6 lg:px-8">
+    <header class="relative min-h-[80vh] flex items-center justify-center pt-8 pb-16 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <!-- Left: Hero Text Column -->
@@ -148,24 +125,24 @@
                     Sharon Suresh
                 </h1>
                 
-                <p class="text-base sm:text-lg lg:text-xl text-slate-200 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    Hello and welcome! I am Sharon, a tech enthusiast, creative thinker, and your friendly problem solver. 
+                <p class="text-lg sm:text-xl lg:text-2xl text-slate-200 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed font-display">
+                    Hello and welcome! I am Sharon, a tech enthusiast, creative thinker, and your friendly problem solver.
                 </p>
-                
-                <p class="text-sm sm:text-base text-slate-400 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed italic">
-                    "Even in an era of massive scale and big tech, the most meaningful work is still the kind that solves a specific problem for a specific person. I’m a builder, a mentor, and a perpetual student of how technology can make us more human, not less."
+
+                <p class="text-base sm:text-lg text-slate-300 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed italic">
+                    "I believe that even in an era of massive scale and big tech, the most meaningful work is still the kind that solves a specific problem for a specific person. I’m a builder, a mentor, and a perpetual student of how technology can make us more human, not less."
                 </p>
 
                 <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-                    <a href="#connect" class="px-6 py-3 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 transition-all transform hover:-translate-y-0.5">
-                        Let's Work Together
+                    <a href="#about-me" class="px-6 py-3 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 transition-all transform hover:-translate-y-0.5">
+                        About Me & Bio
                     </a>
-                    <a href="#arcade" class="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-semibold transition-all">
-                        Play Automation Run
+                    <a href="#connect" class="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-semibold transition-all">
+                        Let's Collaborate
                     </a>
                 </div>
                 
-                <!-- Micro Stats/Pillars Bar -->
+                <!-- Micro Stats Bar -->
                 <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/5 max-w-md mx-auto lg:mx-0">
                     <div>
                         <div class="text-2xl font-bold font-display text-brand-blue">8+</div>
@@ -182,11 +159,11 @@
                 </div>
             </div>
 
-            <!-- Right: Hero Interactive Image Widget -->
+            <!-- Right: Hero Image Widget -->
             <div class="lg:col-span-5 flex justify-center relative">
                 <div class="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl group border border-white/10">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent z-10"></div>
-                    <img src="WhatsApp Image 2026-06-28 at 6.42.47 PM.jpeg" 
+                    <img src="WhatsApp Image 2026-06-28 at 6.36.21 PM.jpeg" 
                          alt="Sharon Suresh" 
                          class="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
                          onerror="this.src='https://placehold.co/400x500/030712/3b82f6?text=Sharon+Suresh'">
@@ -201,6 +178,70 @@
             </div>
         </div>
     </header>
+
+    <!-- NEW Section: About Me -->
+    <section id="about-me" class="py-16 relative overflow-hidden bg-brand-card/30 border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl sm:text-4xl font-bold font-display text-gradient">About Me</h2>
+                <p class="text-slate-300 max-w-2xl mx-auto mt-3 font-light leading-relaxed text-sm sm:text-base">
+                    I am an analyst at Google, technical mentor, and the founder of One Way Education. I design educational strategies that bridge advanced logical and database mental models with actual operational needs.
+                </p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl space-y-6">
+                <div class="text-center">
+                    <p class="text-sm font-medium text-brand-teal uppercase tracking-wider"><i class="fa-regular fa-user mr-1"></i> My Professional Journey</p>
+                    <p class="text-xs text-slate-400 mt-1">Get to know me. Choose between a quick summary or my full story, and feel free to copy it.</p>
+                </div>
+
+                <!-- Toggle Controls -->
+                <div class="flex justify-center p-1 bg-white/5 border border-white/10 rounded-full max-w-xs mx-auto mb-6 gap-1">
+                    <button onclick="toggleBio('short')" id="bio-btn-short" class="flex-1 py-1.5 text-xs font-semibold rounded-full bg-brand-teal text-white transition-all">
+                        Short Bio
+                    </button>
+                    <button onclick="toggleBio('long')" id="bio-btn-long" class="flex-1 py-1.5 text-xs font-semibold rounded-full text-slate-400 hover:text-white transition-all">
+                        Full Biography
+                    </button>
+                </div>
+
+                <!-- Text Boxes -->
+                <div class="relative bg-brand-dark/50 border border-white/5 rounded-xl p-5 sm:p-6 text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+                    <!-- Short Bio -->
+                    <div id="bio-text-short" class="block space-y-3">
+                        <p>
+                            I am an <strong>Engineering Analyst at Google</strong>, a technical mentor, and the founder of <strong>One Way Education</strong>. An alumna of <strong>BITS Pilani (Goa Campus)</strong>, my work centers on bridging the gap between sophisticated data analytics and real-world human problem-solving.
+                        </p>
+                        <p>
+                            Over the years, I've had the privilege of helping business analysts and product managers scale their skills, mentoring over 1,000 career-transitioning students across programs like Masai School, and collaborating on systems automation globally. I believe technology is at its best when it solves a specific problem for a specific person.
+                        </p>
+                    </div>
+
+                    <!-- Long Bio -->
+                    <div id="bio-text-long" class="hidden space-y-3">
+                        <p>
+                            My journey in tech is driven by curiosity, analytical logic, and a passion for teaching. I graduated with a dual degree from <strong>BITS Pilani, Goa Campus</strong>, where I balanced technical rigors with leading impact initiatives like 180 Degrees Consulting. My career took off in the fast-paced fintech space at <strong>Groww</strong> as a Business Analyst, where I designed complex database queries, conducted deep-dive root cause analyses, and drove end-to-end statistical hypothesis tests.
+                        </p>
+                        <p>
+                            Today, as an <strong>Engineering Analyst at Google</strong>, I leverage analytical workflows to solve problems at scale. Beyond my corporate role, I am deeply committed to education. Through <strong>One Way Education</strong>, I design learning programs that turn complex data, statistics, and machine learning models into accessible, career-ready skills.
+                        </p>
+                        <p>
+                            I regularly partner with premier academic institutions like <strong>IIT Patna</strong>, <strong>BITS Goa</strong>, and <strong>BITSoM</strong> to mentor future tech leaders. Whether orchestrating international workflow automation or troubleshooting an SQL script, my focus remains the same: using technology to empower people and make systems more human.
+                        </p>
+                    </div>
+
+                    <!-- Floating Copy Button -->
+                    <button onclick="copyBioToClipboard()" class="absolute top-4 right-4 p-2.5 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-brand-teal hover:bg-brand-teal/10 hover:border-brand-teal/30 transition-all shadow-md group" title="Copy text to clipboard">
+                        <i class="fa-regular fa-copy group-hover:scale-110 transition-transform"></i>
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-xs text-slate-500 italic"><i class="fa-solid fa-circle-info mr-1 text-brand-teal"></i> Feel free to copy either version of my bio for profiles, directory listings, or speaker introductions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="about" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -275,7 +316,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Skill Card 1: Data Analytics -->
+                <!-- Skill Card 1: Data Analytics & Query Logic -->
                 <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-blue/30 transition-all duration-300">
                     <div class="text-brand-blue text-3xl mb-4"><i class="fa-solid fa-database"></i></div>
                     <h3 class="text-lg font-bold text-white mb-3">Analytics & Query Logic</h3>
@@ -288,42 +329,42 @@
                     </div>
                 </div>
 
-                <!-- Skill Card 2: Systems Automation -->
+                <!-- Skill Card 2: Advanced Statistics -->
                 <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-purple/30 transition-all duration-300">
-                    <div class="text-brand-purple text-3xl mb-4"><i class="fa-solid fa-robot"></i></div>
-                    <h3 class="text-lg font-bold text-white mb-3">Workflow Automation</h3>
-                    <p class="text-xs text-slate-400 mb-4">Eliminating manual overhead using automated logic pipelines.</p>
+                    <div class="text-brand-purple text-3xl mb-4"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="text-lg font-bold text-white mb-3">Advanced Statistics</h3>
+                    <p class="text-xs text-slate-400 mb-4">Conducting statistical validation, hypothesis testing, and quantitative assessments.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">N8N Workflows</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Zapier / APIs</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Agentic AI</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">HubSpot automation</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Hypothesis Testing</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Probability Distributions</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Statistical Significance</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">A/B Evaluation</span>
                     </div>
                 </div>
 
-                <!-- Skill Card 3: Business & Product Strategy -->
+                <!-- Skill Card 3: Machine Learning & AI -->
                 <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-teal/30 transition-all duration-300">
                     <div class="text-brand-teal text-3xl mb-4"><i class="fa-solid fa-brain"></i></div>
-                    <h3 class="text-lg font-bold text-white mb-3">Product Strategy</h3>
-                    <p class="text-xs text-slate-400 mb-4">Structuring business goals through mental models.</p>
+                    <h3 class="text-lg font-bold text-white mb-3">Machine Learning & AI</h3>
+                    <p class="text-xs text-slate-400 mb-4">Structuring prognostic model flows and prompt architectures.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">CIRCLES</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">RICE Prioritisation</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Wireframing</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">KPI Dashboards</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Predictive Modeling</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Agentic AI</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Vector Embeddings</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Prompt Eng</span>
                     </div>
                 </div>
 
-                <!-- Skill Card 4: Curricular Leadership -->
+                <!-- Skill Card 4: Product & Strategy -->
                 <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-blue/30 transition-all duration-300">
                     <div class="text-brand-blue text-3xl mb-4"><i class="fa-solid fa-chalkboard"></i></div>
-                    <h3 class="text-lg font-bold text-white mb-3">Ecosystem & Coaching</h3>
-                    <p class="text-xs text-slate-400 mb-4">Empowering talent cohorts to transition into core tech roles.</p>
+                    <h3 class="text-lg font-bold text-white mb-3">Product Strategy</h3>
+                    <p class="text-xs text-slate-400 mb-4">Empowering talent cohorts to transition into core tech roles with business mental models.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Curriculum design</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Placement Prep</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Case studies</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Public Speaking</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">CIRCLES Model</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">RICE Priority</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Wireframing</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Curriculum Design</span>
                     </div>
                 </div>
             </div>
@@ -331,80 +372,57 @@
     </section>
 
     <section id="gallery" class="py-24 bg-gradient-to-b from-brand-dark/0 via-brand-card/30 to-brand-dark/0">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-12">
-                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-gradient mb-4">Journey Highlights</h2>
-                <p class="text-slate-300 font-light">Snapshots from Google, global ventures, and international milestones.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-gradient mb-4">Visual Reflections</h2>
+                <p class="text-slate-300 font-light">Selected photographs reflecting academic highlights, global ventures, and institutional milestones.</p>
             </div>
 
-            <!-- Carousel Frame -->
-            <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
-                <!-- Track Container -->
-                <div class="relative overflow-hidden w-full h-[320px] sm:h-[480px]">
-                    
-                    <!-- Slide 1 -->
-                    <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 flex flex-col md:flex-row bg-brand-card">
-                        <div class="w-full md:w-1/2 h-full relative">
-                            <img src="WhatsApp Image 2026-06-28 at 6.42.47 PM.jpeg" 
-                                 class="w-full h-full object-cover" 
-                                 alt="Sharon Suresh at Google"
-                                 onerror="this.src='https://placehold.co/600x800/030712/3b82f6?text=Sharon+at+Google'">
-                        </div>
-                        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center space-y-4">
-                            <span class="text-xs font-semibold text-brand-blue uppercase tracking-widest">Industry Leadership</span>
-                            <h3 class="text-2xl font-bold font-display text-white">Engineering Analyst at Google</h3>
-                            <p class="text-sm text-slate-300 leading-relaxed">
-                                Driving enterprise-level relational insights, process optimisations, and modern analytical framework integrations inside a high-growth tech environment.
-                            </p>
-                        </div>
+            <!-- Solid visual grid showcasing the three required images cleanly -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Image 1 -->
+                <div class="relative group rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-brand-card aspect-[4/5]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300 z-10"></div>
+                    <img src="WhatsApp Image 2026-06-28 at 6.42.47 PM.jpeg" 
+                         class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" 
+                         alt="Sharon Suresh at Google Office"
+                         onerror="this.src='https://placehold.co/400x500/030712/3b82f6?text=Sharon+at+Google'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+                        <span class="text-xs font-semibold text-brand-blue uppercase tracking-wider block mb-1">Corporate Analytics</span>
+                        <h4 class="text-lg font-bold text-white font-display">Analyst (Data AI ML)</h4>
+                        <p class="text-xs text-slate-300 mt-1 font-light">I have worked on complex problems in the analytics and big data space to try solving problems for Google.</p>
                     </div>
-
-                    <!-- Slide 2 -->
-                    <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 flex flex-col md:flex-row bg-brand-card">
-                        <div class="w-full md:w-1/2 h-full relative">
-                            <img src="WhatsApp Image 2026-06-28 at 6.36.22 PM.jpeg" 
-                                 class="w-full h-full object-cover" 
-                                 alt="Sharon Suresh in Dubai"
-                                 onerror="this.src='https://placehold.co/600x800/030712/8b5cf6?text=Global+Tech+Ventures'">
-                        </div>
-                        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center space-y-4">
-                            <span class="text-xs font-semibold text-brand-purple uppercase tracking-widest">Global Perspective</span>
-                            <h3 class="text-2xl font-bold font-display text-white">Ecosystem Dynamics</h3>
-                            <p class="text-sm text-slate-300 leading-relaxed">
-                                Aligning localized teaching with dynamic, cross-regional market developments. Believer in solving tangible problems for global users.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3 -->
-                    <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 flex flex-col md:flex-row bg-brand-card">
-                        <div class="w-full md:w-1/2 h-full relative">
-                            <img src="WhatsApp Image 2026-06-28 at 6.36.21 PM.jpeg" 
-                                 class="w-full h-full object-cover" 
-                                 alt="Sharon Suresh Educator Profile"
-                                 onerror="this.src='https://placehold.co/600x800/030712/14b8a6?text=Mentoring+Impact'">
-                        </div>
-                        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center space-y-4">
-                            <span class="text-xs font-semibold text-brand-teal uppercase tracking-widest">Human Connection</span>
-                            <h3 class="text-2xl font-bold font-display text-white">Tech Met with Soul</h3>
-                            <p class="text-sm text-slate-300 leading-relaxed">
-                                Bridging professional consulting with personalized mentoring. Committed to providing humanized coaching channels in a scalable AI era.
-                            </p>
-                        </div>
-                    </div>
-
                 </div>
 
-                <!-- Navigation Controls -->
-                <button id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-card hover:bg-white/10 flex items-center justify-center text-white z-20 transition-all">
-                    <i class="fa-solid fa-chevron-left text-sm"></i>
-                </button>
-                <button id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-card hover:bg-white/10 flex items-center justify-center text-white z-20 transition-all">
-                    <i class="fa-solid fa-chevron-right text-sm"></i>
-                </button>
+                <!-- Image 2 -->
+                <div class="relative group rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-brand-card aspect-[4/5]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300 z-10"></div>
+                    <img src="WhatsApp Image 2026-06-28 at 9.16.28 PM.jpeg" 
+                         class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" 
+                         alt="Sharon Suresh Workspace"
+                         onerror="this.src='https://placehold.co/400x500/030712/8b5cf6?text=Ecosystem+Dynamics'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+                        <span class="text-xs font-semibold text-brand-purple uppercase tracking-wider block mb-1">Global Ecosystems</span>
+                        <h4 class="text-lg font-bold text-white font-display">Personal Projects</h4>
+                        <p class="text-xs text-slate-300 mt-1 font-light">I have worked on several personal projects and projects in collaboration with my students and other partners.</p>
+                    </div>
+                </div>
 
-                <!-- Navigation Indicator Dots -->
-                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20" id="carousel-indicators-container"></div>
+                <!-- Image 3 -->
+                <div class="relative group rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-brand-card aspect-[4/5]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300 z-10"></div>
+                    <img src="WhatsApp Image 2026-06-28 at 9.27.28 PM.jpeg" 
+                         class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" 
+                         alt="Sharon Suresh BITS Pilani Workshop"
+                         onerror="this.src='https://placehold.co/400x500/030712/14b8a6?text=Mentorship+Impact'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+                        <span class="text-xs font-semibold text-brand-teal uppercase tracking-wider block mb-1">Instruction & Strategy</span>
+                        <h4 class="text-lg font-bold text-white font-display">Teaching, Mentorship and workshop</h4>
+                        <p class="text-xs text-slate-300 mt-1 font-light">This is a picture from the 2026 data analytics workshop i conducted in the BITS Pilani Goa campus.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -422,7 +440,7 @@
                     Corporate Analytics
                 </button>
                 <button onclick="changeTab('mentorship')" id="tab-btn-mentorship" class="tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full text-slate-400 hover:text-white transition-all">
-                    Founding & Mentoring
+                    Mentorship & Educating
                 </button>
                 <button onclick="changeTab('academic')" id="tab-btn-academic" class="tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full text-slate-400 hover:text-white transition-all">
                     Education
@@ -436,7 +454,7 @@
             <div class="space-y-12">
                 
                 <!-- Tab: Corporate Analytics -->
-                <div id="tab-content-corporate" class="tab-content block space-y-8 animate-fade-in">
+                <div id="tab-content-corporate" class="tab-content block space-y-8">
                     <!-- Google Experience -->
                     <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
                         <div class="absolute -left-3 top-8 w-6 h-6 bg-brand-blue rounded-full border-4 border-brand-dark hidden md:block"></div>
@@ -462,7 +480,8 @@
                                 <div class="text-sm text-brand-purple font-semibold">Groww, India • Full-Time</div>
                             </div>
                             <div class="flex flex-col items-end gap-1">
-                                <span class="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs text-brand-purple font-semibold">Jul 2022 - Sep 2024</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs text-brand-purple font-semibold">Jul 2023 - Sep 2024</span>
+                                <span class="text-xs text-slate-400 mt-1">Associate Business Analyst: Jul 2022 - Jun 2023</span>
                             </div>
                         </div>
                         <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
@@ -474,59 +493,103 @@
                     </div>
                 </div>
 
-                <!-- Tab: Education & Founding -->
-                <div id="tab-content-mentorship" class="tab-content hidden space-y-8 animate-fade-in">
+                <!-- Tab: Mentorship & Educating -->
+                <div id="tab-content-mentorship" class="tab-content hidden space-y-8">
                     
-                    <!-- Global Automation Consulting -->
-                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-brand-blue/10 relative">
-                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-                            <div>
-                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Global Automation & Workflow Projects</h3>
-                                <div class="text-sm text-brand-blue font-semibold">Consulting • International Collaborations</div>
+                    <!-- Section A: Founding Venture -->
+                    <div class="border-l-2 border-brand-teal pl-4 sm:pl-6 space-y-6">
+                        <div class="text-xs font-semibold uppercase tracking-widest text-brand-teal"><i class="fa-solid fa-cube mr-1"></i> Venture Founding</div>
+                        
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Founder</h3>
+                                    <div class="text-sm text-brand-teal font-semibold">One Way Education • Venture</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/20 text-xs text-brand-teal font-semibold">Jan 2026 - Present</span>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Ongoing Projects</span>
+                            <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+                                Built from the ground up to empower non-tech career transitioners, aspiring data analysts, and engineering candidates. Designed robust curriculum maps focusing on SQL query logic, Python development, and automated workspace tools.
+                            </p>
                         </div>
-                        <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
-                            <li>Partnered with a London-based Flow Engineer to optimize complex event-based systems, streamlining functional pipelines.</li>
-                            <li>Architected and implemented automation sequences for a prominent educational leader in the public sector in Australia to scale systemic knowledge distribution models.</li>
-                            <li>Synthesized modern technical toolchains (Python scripts, custom database tasks, flowcharts) to handle process integrations remotely.</li>
-                        </ul>
                     </div>
 
-                    <!-- One Way Education -->
-                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
-                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-                            <div>
-                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Founder</h3>
-                                <div class="text-sm text-brand-teal font-semibold">One Way Education • Venture</div>
+                    <!-- Section B: Automation Consultation -->
+                    <div class="border-l-2 border-brand-blue pl-4 sm:pl-6 space-y-6 mt-8">
+                        <div class="text-xs font-semibold uppercase tracking-widest text-brand-blue"><i class="fa-solid fa-gears mr-1"></i> Systems Consultation</div>
+                        
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-brand-blue/10 relative">
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Global Automation & Workflow Projects</h3>
+                                    <div class="text-sm text-brand-blue font-semibold">Consulting • International Collaborations</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Ongoing Projects</span>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/20 text-xs text-brand-teal font-semibold">Jan 2026 - Present</span>
+                            <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                                <li>Partnered with a London-based Flow Engineer to optimize complex event-based systems, streamlining functional pipelines.</li>
+                                <li>Architected and implemented automation sequences for a prominent educational leader in the public sector in Australia to scale systemic knowledge distribution models.</li>
+                                <li>Synthesized modern technical toolchains (Python scripts, custom database tasks, flowcharts) to handle process integrations remotely.</li>
+                            </ul>
                         </div>
-                        <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed mb-4">
-                            Built from the ground up to empower non-tech career transitioners, aspiring data analysts, and engineering candidates. Designed robust curriculum maps focusing on SQL query logic, Python development, and automated workspace tools.
-                        </p>
                     </div>
 
-                    <!-- BITSoM / Other roles -->
-                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
-                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-                            <div>
-                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Guest Instructor & PM Mentor</h3>
-                                <div class="text-sm text-brand-blue font-semibold">BITSoM, IIT Patna, BITS Goa • Academic</div>
+                    <!-- Section C: Mentorship Ecosystem -->
+                    <div class="border-l-2 border-brand-purple pl-4 sm:pl-6 space-y-6 mt-8">
+                        <div class="text-xs font-semibold uppercase tracking-widest text-brand-purple"><i class="fa-solid fa-chalkboard-user mr-1"></i> Educational Mentorship</div>
+                        
+                        <!-- Masai School -->
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Industry Mentor</h3>
+                                    <div class="text-sm text-brand-purple font-semibold">Masai School • Mentor Contract</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs text-brand-purple font-semibold">Ongoing Partnership</span>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Ongoing Partnerships</span>
+                            <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                                <li>Deliver live industry projects, targeted technical evaluations, and specialized SQL database query mental models to career-transitioning professionals.</li>
+                                <li>Directly mentored and evaluated 1,000+ career-transitioning students, preparing them for active analyst and software engineering roles.</li>
+                            </ul>
                         </div>
-                        <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
-                            <li>Formulating customized technical bootcamps targeting advanced SQL logic, career development pipelines, and mock diagnostic interviews.</li>
-                            <li>External PM Mentor for BITSoM cohorts, advising on data management and product optimization frameworks.</li>
-                        </ul>
+
+                        <!-- Relevel by Unacademy -->
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Teaching Assistant & Mentor</h3>
+                                    <div class="text-sm text-brand-purple font-semibold">Relevel by Unacademy • Contract</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs text-brand-purple font-semibold">Jun 2022 - Dec 2023</span>
+                            </div>
+                            <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                                <li>Mentored students in the fields of Data Science and Analytics, as well as GMAT and CAT preparation tracks.</li>
+                                <li>Vetted academic question papers and conducted live, daily interactive technical doubt-solving forums.</li>
+                                <li>Managed and facilitated over 6 distinct cohorts, consisting of an average of 70 students each.</li>
+                                <li>Supervised complex class calendars and streamlined all operations and communications between students, executive management, and academic faculty.</li>
+                            </ul>
+                        </div>
+
+                        <!-- BITSoM / Other roles -->
+                        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Guest Instructor & PM Mentor</h3>
+                                    <div class="text-sm text-brand-blue font-semibold">BITSoM, IIT Patna, BITS Goa • Academic</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Ongoing Partnerships</span>
+                            </div>
+                            <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                                <li>Formulating customized technical bootcamps targeting advanced SQL logic, career development pipelines, and mock diagnostic interviews.</li>
+                                <li>External PM Mentor for BITSoM cohorts, advising on data management and product optimization frameworks.</li>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
 
                 <!-- Tab: Education -->
-                <div id="tab-content-academic" class="tab-content hidden space-y-8 animate-fade-in">
-                    
+                <div id="tab-content-academic" class="tab-content hidden space-y-8">
                     <!-- BITS Pilani Goa Campus -->
                     <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
                         <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
@@ -567,12 +630,10 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Tab: Early Foundations -->
-                <div id="tab-content-early" class="tab-content hidden space-y-8 animate-fade-in">
-                    
+                <div id="tab-content-early" class="tab-content hidden space-y-8">
                     <!-- Porter Intern -->
                     <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
                         <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
@@ -600,126 +661,8 @@
                             Structured data-driven expansion strategies across global clusters (India, APAC, MENA). Handled pipeline metrics and automated tracking using HubSpot CRM and custom database analytics.
                         </p>
                     </div>
-
                 </div>
 
-            </div>
-        </div>
-    </section>
-
-    <section id="arcade" class="py-20 bg-gradient-to-t from-brand-dark via-brand-card/20 to-brand-dark">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
-            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
-                <div class="relative z-10 text-center">
-                    <span class="text-xs font-bold text-brand-blue uppercase tracking-widest px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20">Arcade Experience</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold font-display text-gradient mt-4">Sharon's Automation Run</h2>
-                    <p class="text-slate-300 text-xs sm:text-sm mt-2 max-w-xl mx-auto">
-                        Control the <strong>"Optimization Hub"</strong> basket below. Capture structural workflow scripts while dodging database bottlenecks!
-                    </p>
-
-                    <!-- Game Screen Container -->
-                    <div class="relative mt-8 flex flex-col items-center arcade-scanlines rounded-2xl">
-                        <canvas id="game-canvas" width="600" height="350" class="w-full bg-brand-dark rounded-2xl border border-white/10 max-w-[600px] block"></canvas>
-                        
-                        <!-- Overlay menu UI panel inside the frame -->
-                        <div id="game-overlay" class="absolute inset-0 bg-brand-dark/95 flex flex-col items-center justify-center rounded-2xl transition-all gap-4">
-                            <h3 class="text-xl font-bold text-white font-display" id="game-status-text">Announcer System Ready</h3>
-                            <button id="launch-btn" onclick="startGameEngine()" class="px-6 py-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold text-sm hover:scale-105 transition-transform flex items-center gap-2 shadow-lg shadow-brand-blue/25">
-                                <i class="fa-solid fa-volume-high"></i> Launch & Synthesize Voice
-                            </button>
-                            <span class="text-[10px] text-slate-400">Announcer uses Gemini generative TTS! Wait for the countdown!</span>
-                        </div>
-
-                        <!-- Touch buttons for adaptivity -->
-                        <div class="flex items-center justify-center gap-6 mt-4 w-full max-w-[400px]">
-                            <button id="ctrl-left" class="flex-1 py-4 bg-white/5 border border-white/10 hover:bg-white/10 active:bg-brand-blue/20 text-white rounded-xl select-none flex items-center justify-center text-xl font-bold" aria-label="Move Left">
-                                <i class="fa-solid fa-arrow-left"></i>
-                            </button>
-                            <button id="ctrl-right" class="flex-1 py-4 bg-white/5 border border-white/10 hover:bg-white/10 active:bg-brand-blue/20 text-white rounded-xl select-none flex items-center justify-center text-xl font-bold" aria-label="Move Right">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                        <p class="text-[10px] text-slate-500 mt-2">Use desktop Left/Right arrow keys or touch buttons to play.</p>
-                    </div>
-
-                    <!-- Legend -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-white/5 text-left text-xs">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-teal-400 block"></span>
-                            <span class="text-slate-300">SQL (+10)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-blue-400 block"></span>
-                            <span class="text-slate-300">Python (+15)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-purple-400 block"></span>
-                            <span class="text-slate-300">Automation (+25)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500 block"></span>
-                            <span class="text-slate-300">Errors (-20)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="quiz" class="py-24 bg-gradient-to-t from-brand-dark/0 via-brand-card/20 to-brand-dark/0 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
-            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-white/10 shadow-2xl relative overflow-hidden">
-                <div class="relative z-10">
-                    <div class="text-center mb-8">
-                        <span class="text-xs font-bold text-brand-blue uppercase tracking-widest px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20">Interactive Path Finder</span>
-                        <h2 class="text-2xl sm:text-3xl font-bold font-display text-white mt-4">Which Sharon are you looking for?</h2>
-                        <p class="text-slate-300 text-sm mt-2">Pick an option below to simulate custom workflows or curriculum plans!</p>
-                    </div>
-
-                    <!-- Matcher Selection Buttons -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10" id="quiz-options">
-                        <button onclick="selectQuizOption('recruiter')" class="quiz-btn p-5 rounded-2xl border border-white/10 hover:border-brand-blue/50 bg-white/5 hover:bg-brand-blue/10 text-left transition-all group">
-                            <div class="w-10 h-10 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-lg mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-briefcase"></i>
-                            </div>
-                            <h4 class="font-bold text-white font-display text-base">The Analyst & Consultant</h4>
-                            <p class="text-xs text-slate-400 mt-1">Want custom analytics strategies or deep product analytics logic.</p>
-                        </button>
-
-                        <button onclick="selectQuizOption('student')" class="quiz-btn p-5 rounded-2xl border border-white/10 hover:border-brand-purple/50 bg-white/5 hover:bg-brand-purple/10 text-left transition-all group">
-                            <div class="w-10 h-10 rounded-xl bg-brand-purple/10 flex items-center justify-center text-brand-purple text-lg mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </div>
-                            <h4 class="font-bold text-white font-display text-base">The Mentor & Educator</h4>
-                            <p class="text-xs text-slate-400 mt-1">Ready to learn SQL models, Python scripts, or Agentic AI.</p>
-                        </button>
-
-                        <button onclick="selectQuizOption('partner')" class="quiz-btn p-5 rounded-2xl border border-white/10 hover:border-brand-teal/50 bg-white/5 hover:bg-brand-teal/10 text-left transition-all group">
-                            <div class="w-10 h-10 rounded-xl bg-brand-teal/10 flex items-center justify-center text-brand-teal text-lg mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-handshake"></i>
-                            </div>
-                            <h4 class="font-bold text-white font-display text-base">The Venture Founder</h4>
-                            <p class="text-xs text-slate-400 mt-1">Looking to run corporate training modules or bootcamp programs.</p>
-                        </button>
-                    </div>
-
-                    <!-- Dynamic Output Zone -->
-                    <div id="quiz-result" class="hidden p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 animate-fade-in">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue to-brand-purple flex-shrink-0 flex items-center justify-center text-white text-lg">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            </div>
-                            <div class="space-y-3">
-                                <h3 class="text-lg font-bold text-white font-display" id="quiz-result-title">Suggested Track</h3>
-                                <p class="text-sm text-slate-300 leading-relaxed font-light" id="quiz-result-text"></p>
-                                <div class="pt-4 flex flex-wrap gap-3" id="quiz-result-ctas"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- Interactive grid overlay backlights -->
-                <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
             </div>
         </div>
     </section>
@@ -741,7 +684,7 @@
                         <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-brand-blue">
                             <i class="fa-solid fa-map-location-dot"></i>
                         </div>
-                        <span class="text-sm">Bangalore & Pune, India (Hybrid / Remote Available)</span>
+                        <span class="text-sm font-light">Bangalore & Pune, India (Hybrid / Remote Available)</span>
                     </div>
                     <div class="flex items-center gap-4 text-slate-300">
                         <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-brand-blue">
@@ -752,7 +695,7 @@
                 </div>
             </div>
 
-            <!-- Right: Interactive Dynamic Form & Channels Card -->
+            <!-- Right: Interactive Channels Card -->
             <div class="lg:col-span-6">
                 <div class="glass-card rounded-3xl p-8 border border-white/10 shadow-2xl space-y-6">
                     <h3 class="text-xl font-bold font-display text-white">Direct Resources & Channels</h3>
@@ -761,25 +704,25 @@
                         <a href="https://sites.google.com/view/onewaylearning" target="_blank" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-blue/10 hover:border-brand-blue/30 transition-all flex flex-col space-y-2 group">
                             <span class="text-xs font-semibold text-brand-blue">Core Portal</span>
                             <span class="font-bold text-white text-sm group-hover:text-brand-blue transition-colors">One Way Learning ↗</span>
-                            <span class="text-xs text-slate-400">Track latest framework maps, bootcamps and workshop paths.</span>
+                            <span class="text-xs text-slate-400 font-light">Track latest framework maps, bootcamps and workshop paths.</span>
                         </a>
 
                         <a href="https://promptly-yours.blogspot.com/" target="_blank" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-purple/10 hover:border-brand-purple/30 transition-all flex flex-col space-y-2 group">
                             <span class="text-xs font-semibold text-brand-purple">Tech blog</span>
                             <span class="font-bold text-white text-sm group-hover:text-brand-purple transition-colors">Promptly Yours ↗</span>
-                            <span class="text-xs text-slate-400">Discover direct tutorials on SQL structures and workflow tools.</span>
+                            <span class="text-xs text-slate-400 font-light">Discover direct tutorials on SQL structures and workflow tools.</span>
                         </a>
 
                         <a href="https://silicon-and-soul.blogspot.com/" target="_blank" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-teal/10 hover:border-brand-teal/30 transition-all flex flex-col space-y-2 group">
                             <span class="text-xs font-semibold text-brand-teal">Insights blog</span>
                             <span class="font-bold text-white text-sm group-hover:text-brand-teal transition-colors">Silicon & Soul ↗</span>
-                            <span class="text-xs text-slate-400">Read on how health meets tech and personal philosophy trends.</span>
+                            <span class="text-xs text-slate-400 font-light">Read on how health meets tech and personal philosophy trends.</span>
                         </a>
 
                         <div onclick="triggerConsultation()" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-blue/10 hover:border-brand-blue/30 transition-all flex flex-col space-y-2 group cursor-pointer">
                             <span class="text-xs font-semibold text-brand-blue">Collaboration</span>
                             <span class="font-bold text-white text-sm group-hover:text-brand-blue transition-colors">Request a session ↗</span>
-                            <span class="text-xs text-slate-400">Invite Sharon for high-energy tech bootcamps or mentor programs.</span>
+                            <span class="text-xs text-slate-400 font-light">Invite Sharon for high-energy tech bootcamps or mentor programs.</span>
                         </div>
                     </div>
                 </div>
@@ -811,7 +754,7 @@
     </footer>
 
     <script>
-        // --- Canvas Particle Animation Logic (Optimized for higher velocity speed) ---
+        // --- Canvas Particle Animation Logic (Optimized for faster velocity/movement rate) ---
         const canvas = document.getElementById('ambient-canvas');
         const ctx = canvas.getContext('2d');
         let dots = [];
@@ -827,8 +770,8 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 // Boosted velocities for faster animation rate as requested
-                this.vx = (Math.random() - 0.5) * 1.5;
-                this.vy = (Math.random() - 0.5) * 1.5;
+                this.vx = (Math.random() - 0.5) * 2.5; 
+                this.vy = (Math.random() - 0.5) * 2.5;
                 this.r = Math.random() * 1.5 + 0.5;
                 this.opacity = Math.random() * 0.6 + 0.2;
             }
@@ -875,45 +818,7 @@
 
         window.addEventListener('resize', resizeAmbientCanvas);
 
-        // --- Custom Image Slideshow Carousel Controls ---
-        const slides = document.querySelectorAll('.carousel-slide');
-        let currentSlideIdx = 0;
-
-        function initCarousel() {
-            const container = document.getElementById('carousel-indicators-container');
-            container.innerHTML = '';
-            slides.forEach((_, idx) => {
-                const indicator = document.createElement('button');
-                indicator.className = `w-2 h-2 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-brand-blue w-6' : 'bg-slate-600'}`;
-                indicator.addEventListener('click', () => goToSlide(idx));
-                container.appendChild(indicator);
-            });
-        }
-
-        function updateCarouselIndicators() {
-            const indicators = document.querySelectorAll('#carousel-indicators-container button');
-            indicators.forEach((ind, idx) => {
-                if (idx === currentSlideIdx) {
-                    ind.className = 'w-2.5 h-2.5 rounded-full bg-brand-blue w-6 transition-all duration-300';
-                } else {
-                    ind.className = 'w-2 h-2 rounded-full bg-slate-600 transition-all duration-300';
-                }
-            });
-        }
-
-        function goToSlide(idx) {
-            slides[currentSlideIdx].classList.remove('opacity-100');
-            slides[currentSlideIdx].classList.add('opacity-0');
-            currentSlideIdx = (idx + slides.length) % slides.length;
-            slides[currentSlideIdx].classList.remove('opacity-0');
-            slides[currentSlideIdx].classList.add('opacity-100');
-            updateCarouselIndicators();
-        }
-
-        document.getElementById('carousel-next').addEventListener('click', () => goToSlide(currentSlideIdx + 1));
-        document.getElementById('carousel-prev').addEventListener('click', () => goToSlide(currentSlideIdx - 1));
-
-        // --- Mobile Responsiveness Dropdown Trigger ---
+        // --- Managing responsive menu toggles ---
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -924,6 +829,58 @@
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
+
+        // --- Speaker Bio Toggle ---
+        let currentBioType = 'short';
+        function toggleBio(type) {
+            currentBioType = type;
+            const shortBioText = document.getElementById('bio-text-short');
+            const longBioText = document.getElementById('bio-text-long');
+            const shortBtn = document.getElementById('bio-btn-short');
+            const longBtn = document.getElementById('bio-btn-long');
+
+            if (type === 'short') {
+                shortBioText.classList.remove('hidden');
+                shortBioText.classList.add('block');
+                longBioText.classList.add('hidden');
+                longBioText.classList.remove('block');
+
+                shortBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-full bg-brand-teal text-white transition-all";
+                longBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-full text-slate-400 hover:text-white transition-all";
+            } else {
+                longBioText.classList.remove('hidden');
+                longBioText.classList.add('block');
+                shortBioText.classList.add('hidden');
+                shortBioText.classList.remove('block');
+
+                longBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-full bg-brand-teal text-white transition-all";
+                shortBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-full text-slate-400 hover:text-white transition-all";
+            }
+        }
+
+        // --- Copy Speaker Bio logic ---
+        function copyBioToClipboard() {
+            let bioTextToCopy = "";
+            if (currentBioType === 'short') {
+                bioTextToCopy = document.getElementById('bio-text-short').innerText;
+            } else {
+                bioTextToCopy = document.getElementById('bio-text-long').innerText;
+            }
+
+            navigator.clipboard.writeText(bioTextToCopy).then(() => {
+                const toast = document.getElementById('toast-notif');
+                const textNode = document.getElementById('toast-text');
+                textNode.textContent = "Bio copied to clipboard successfully!";
+                
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                }, 3500);
+            });
+        }
 
         // --- Milestone Timeline Tabbed Framework Switching ---
         function changeTab(tabId) {
@@ -946,63 +903,6 @@
             }
         }
 
-        // --- Interactive Role Matcher Decision-maker Wizard ---
-        function selectQuizOption(role) {
-            document.querySelectorAll('.quiz-btn').forEach(btn => {
-                btn.classList.remove('border-brand-blue/50', 'border-brand-purple/50', 'border-brand-teal/50', 'bg-white/10');
-            });
-
-            const resultContainer = document.getElementById('quiz-result');
-            const resultTitle = document.getElementById('quiz-result-title');
-            const resultText = document.getElementById('quiz-result-text');
-            const resultCtas = document.getElementById('quiz-result-ctas');
-
-            resultContainer.classList.remove('hidden');
-            resultCtas.innerHTML = '';
-
-            let matchedTitle = "";
-            let matchedText = "";
-            let customActions = [];
-
-            if (role === 'recruiter') {
-                matchedTitle = "Consultation Strategy & Business Insights Tracker";
-                matchedText = "For platforms or organizations looking for high-fidelity SQL optimization pipelines, user analytics structures, and end-to-end A/B tests. Let's design specialized dashboards matching your analytical workflows.";
-                customActions = [
-                    { label: "Request Consultation Session", action: triggerConsultation },
-                    { label: "Check Analytics Roadmap", link: "#timeline" }
-                ];
-            } else if (role === 'student') {
-                matchedTitle = "Personalized Technical Upskill Tracker";
-                matchedText = "For students or non-tech transitioners looking to master logical database structures and programmatic Python frameworks. We construct concrete case schemas (like the Masai SQL cohort paths) to get you industry-ready.";
-                customActions = [
-                    { label: "Browse Promptly Yours Blog ↗", link: "https://promptly-yours.blogspot.com/" },
-                    { label: "Open One Way Learning Hub ↗", link: "https://sites.google.com/view/onewaylearning" }
-                ];
-            } else {
-                matchedTitle = "Institutional Bootcamp Strategy Planner";
-                matchedText = "For colleges, business programs (IITs, BITSoM) looking to coordinate comprehensive workshops. From curriculum maps to interactive mock validation trials, my team and I build customized onboarding plans.";
-                customActions = [
-                    { label: "Request Workshop Plan", action: triggerConsultation },
-                    { label: "Explore Silicon & Soul Blog ↗", link: "https://silicon-and-soul.blogspot.com/" }
-                ];
-            }
-
-            resultTitle.textContent = matchedTitle;
-            resultText.textContent = matchedText;
-
-            customActions.forEach(btnObj => {
-                const btnNode = document.createElement('button');
-                btnNode.className = "px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white transition-all";
-                btnNode.textContent = btnObj.label;
-                if (btnObj.action) {
-                    btnNode.addEventListener('click', btnObj.action);
-                } else if (btnObj.link) {
-                    btnNode.addEventListener('click', () => window.open(btnObj.link, '_blank'));
-                }
-                resultCtas.appendChild(btnNode);
-            });
-        }
-
         function triggerConsultation() {
             const toast = document.getElementById('toast-notif');
             const textNode = document.getElementById('toast-text');
@@ -1017,69 +917,10 @@
             }, 4500);
         }
 
-        let audioCtx;
-        function initAudioEngine() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        // Native retro synth generator
-        function playSynthSound(type) {
-            try {
-                initAudioEngine();
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-
-                const osc = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-
-                if (type === 'success') {
-                    // Fast high pitch bleep arpeggio
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5
-                    osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.16); // C6
-                    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.3);
-                } else if (type === 'error') {
-                    // Buzz hit
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(120, audioCtx.currentTime);
-                    osc.frequency.linearRampToValueAtTime(40, audioCtx.currentTime + 0.25);
-                    gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.25);
-                } else if (type === 'gameover') {
-                    // Descending minor tune
-                    osc.type = 'triangle';
-                    const notes = [392.00, 349.23, 311.13, 261.63]; // G4, F4, Eb4, C4
-                    notes.forEach((freq, idx) => {
-                        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.15);
-                    });
-                    gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.7);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.7);
-                } else if (type === 'countdown') {
-                    // Standard short beep
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.1);
-                }
-            } catch(e) {
-                console.warn('Audio synthesis failed to initialize:', e);
-            }
-        }
-
-        function base64ToArrayBuffer(base64) {
-            const binaryString = window
+        window.onload = function() {
+            initAmbientEngine();
+            renderAmbientEngineLoop();
+        };
+    </script>
+</body>
+</html>
