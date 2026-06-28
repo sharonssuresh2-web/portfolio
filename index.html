@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharon Suresh | Educator, Mentor & Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030712',
+                            card: '#0b1329',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
+                            teal: '#14b8a6',
+                            slate: '#f1f5f9'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-card {
+            background: rgba(11, 19, 41, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #2dd4bf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -10;
+            background: radial-gradient(circle at 10% 20%, rgba(17, 24, 39, 1) 0%, rgba(3, 7, 18, 1) 90%);
+            overflow: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+        /* Game Screen CSS styling override */
+        #game-canvas {
+            image-rendering: pixelated;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            transition: transform 0.1s ease-out;
+        }
+        /* Arcade scanlines overlay effect */
+        .arcade-scanlines {
+            position: relative;
+            overflow: hidden;
+        }
+        .arcade-scanlines::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 5;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-blue selection:text-white">
+
+    <div class="animated-bg">
+        <canvas id="ambient-canvas" class="w-full h-full opacity-60 pointer-events-none"></canvas>
+    </div>
+
+    <nav class="sticky top-0 z-50 w-full glass-card border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span class="text-2xl font-bold font-display tracking-tight text-gradient cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        Sharon Suresh
+                    </span>
+                </div>
+                <!-- Desktop Navigation links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Pillars</a>
+                    <a href="#skills" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Expertise</a>
+                    <a href="#gallery" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Visuals</a>
+                    <a href="#timeline" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Journey</a>
+                    <a href="#arcade" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Arcade</a>
+                    <a href="#quiz" class="text-sm font-medium text-slate-300 hover:text-brand-blue transition-colors">Interactive Planner</a>
+                    <a href="#connect" class="text-sm font-medium px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20 hover:bg-brand-blue/20 text-brand-blue transition-all">Get in Touch</a>
+                </div>
+                <!-- Mobile Navigation Trigger -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 text-slate-400 hover:text-white focus:outline-none" aria-label="Toggle menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Dropdown Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-brand-dark/95 backdrop-blur-lg">
+            <div class="px-2 pt-2 pb-4 space-y-1">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Pillars</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Expertise</a>
+                <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Visuals</a>
+                <a href="#timeline" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Journey</a>
+                <a href="#arcade" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Arcade</a>
+                <a href="#quiz" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-white/5">Interactive Planner</a>
+                <a href="#connect" class="block px-3 py-2 rounded-md text-base font-medium text-brand-blue hover:bg-white/5">Get in Touch</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative min-h-[90vh] flex items-center justify-center pt-8 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left: Hero Text Column -->
+            <div class="lg:col-span-7 flex flex-col justify-center text-center lg:text-left space-y-6">
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display leading-tight tracking-tight mt-4">
+                    Sharon Suresh
+                </h1>
+                
+                <p class="text-base sm:text-lg lg:text-xl text-slate-200 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Hello and welcome! I am Sharon, a tech enthusiast, creative thinker, and your friendly problem solver. 
+                </p>
+                
+                <p class="text-sm sm:text-base text-slate-400 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed italic">
+                    "Even in an era of massive scale and big tech, the most meaningful work is still the kind that solves a specific problem for a specific person. I’m a builder, a mentor, and a perpetual student of how technology can make us more human, not less."
+                </p>
+
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#connect" class="px-6 py-3 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 transition-all transform hover:-translate-y-0.5">
+                        Let's Work Together
+                    </a>
+                    <a href="#arcade" class="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-semibold transition-all">
+                        Play Automation Run
+                    </a>
+                </div>
+                
+                <!-- Micro Stats/Pillars Bar -->
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/5 max-w-md mx-auto lg:mx-0">
+                    <div>
+                        <div class="text-2xl font-bold font-display text-brand-blue">8+</div>
+                        <div class="text-xs text-slate-400">Years Industry Exp</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold font-display text-brand-purple">1000+</div>
+                        <div class="text-xs text-slate-400">Students Mentored</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold font-display text-brand-teal">3+</div>
+                        <div class="text-xs text-slate-400">Tech Platforms Linked</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Hero Interactive Image Widget -->
+            <div class="lg:col-span-5 flex justify-center relative">
+                <div class="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl group border border-white/10">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent z-10"></div>
+                    <img src="WhatsApp Image 2026-06-28 at 6.42.47 PM.jpeg" 
+                         alt="Sharon Suresh" 
+                         class="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                         onerror="this.src='https://placehold.co/400x500/030712/3b82f6?text=Sharon+Suresh'">
+                    <div class="absolute bottom-4 left-4 right-4 z-20 glass-card p-4 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-white font-display">Sharon Suresh</h4>
+                        <p class="text-xs text-slate-300">Engineering Analyst @ Google</p>
+                    </div>
+                    <!-- Decorative backlights -->
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-brand-blue/20 rounded-full blur-2xl -z-10"></div>
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-purple/20 rounded-full blur-2xl -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-gradient mb-4">Core Dimensions</h2>
+                <p class="text-slate-300 font-light">Combining technical acumen with strategic education architecture to form future-proof systems.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Dimension 1: Teacher -->
+                <div class="glass-card rounded-2xl p-8 hover:border-brand-blue/30 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center mb-6 text-brand-blue text-xl group-hover:bg-brand-blue group-hover:text-white transition-all">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3 text-white group-hover:text-brand-blue transition-colors">Technical Educator</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Designing advanced SQL, Python, and Product mental models. Facilitated structural upskilling curriculums and high-impact undergraduate training bootcamps at flagship campuses including **IIT Patna** and **BITS Goa**.
+                    </p>
+                </div>
+
+                <!-- Dimension 2: Mentor -->
+                <div class="glass-card rounded-2xl p-8 hover:border-brand-purple/30 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center mb-6 text-brand-purple text-xl group-hover:bg-brand-purple group-hover:text-white transition-all">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3 text-white group-hover:text-brand-purple transition-colors">Strategic Mentor</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Helping students master analytical logic, database schemas, and product thinking frameworks. Guided Product Management student cohorts at **BITSoM** and mentored over 1000+ career transitioners at **Masai School**.
+                    </p>
+                </div>
+
+                <!-- Dimension 3: Founder -->
+                <div class="glass-card rounded-2xl p-8 hover:border-brand-teal/30 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center mb-6 text-brand-teal text-xl group-hover:bg-brand-teal group-hover:text-white transition-all">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3 text-white group-hover:text-brand-teal transition-colors">Learning Founder</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Architecting **One Way Education** (One Way Learning) to bridge the divide between theoretical tech concepts and true operational applications. Author of specialized data frameworks and digital tech communities.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Global Automation Highlight Banner -->
+            <div class="mt-12 glass-card rounded-3xl p-8 border border-brand-blue/20 hover:border-brand-blue/30 transition-all duration-300">
+                <div class="flex flex-col lg:flex-row items-center gap-6">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center text-brand-blue text-2xl flex-shrink-0">
+                        <i class="fa-solid fa-gears animate-spin-slow"></i>
+                    </div>
+                    <div class="flex-1 space-y-2 text-center lg:text-left">
+                        <h3 class="text-xl font-bold font-display text-white">Global Workflow & Systems Automation</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light">
+                            Actively orchestrating cross-border system architectures. Successfully collaborated with a seasoned <strong>Flow Engineer based in London</strong> to design robust event-driven operations, and partnered with an <strong>educational leader in the public sector in Australia</strong> to deploy custom automation sequences, making administrative and learning pipelines seamless.
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <span class="px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold tracking-wide uppercase">
+                            Global Collaborations
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 bg-gradient-to-b from-brand-dark/0 via-brand-card/20 to-brand-dark/0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-gradient mb-4">Core Expertise Stack</h2>
+                <p class="text-slate-300 font-light">Structured tools and mental models deployed across modern analytical, automation, and teaching frameworks.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill Card 1: Data Analytics -->
+                <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-blue/30 transition-all duration-300">
+                    <div class="text-brand-blue text-3xl mb-4"><i class="fa-solid fa-database"></i></div>
+                    <h3 class="text-lg font-bold text-white mb-3">Analytics & Query Logic</h3>
+                    <p class="text-xs text-slate-400 mb-4">Extracting clean insights from massive databases.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">SQL (DQL/DDL)</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Python</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">A/B Testing</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">RCA Logs</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2: Systems Automation -->
+                <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-purple/30 transition-all duration-300">
+                    <div class="text-brand-purple text-3xl mb-4"><i class="fa-solid fa-robot"></i></div>
+                    <h3 class="text-lg font-bold text-white mb-3">Workflow Automation</h3>
+                    <p class="text-xs text-slate-400 mb-4">Eliminating manual overhead using automated logic pipelines.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">N8N Workflows</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Zapier / APIs</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Agentic AI</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">HubSpot automation</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3: Business & Product Strategy -->
+                <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-teal/30 transition-all duration-300">
+                    <div class="text-brand-teal text-3xl mb-4"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="text-lg font-bold text-white mb-3">Product Strategy</h3>
+                    <p class="text-xs text-slate-400 mb-4">Structuring business goals through mental models.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">CIRCLES</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">RICE Prioritisation</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Wireframing</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">KPI Dashboards</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4: Curricular Leadership -->
+                <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-blue/30 transition-all duration-300">
+                    <div class="text-brand-blue text-3xl mb-4"><i class="fa-solid fa-chalkboard"></i></div>
+                    <h3 class="text-lg font-bold text-white mb-3">Ecosystem & Coaching</h3>
+                    <p class="text-xs text-slate-400 mb-4">Empowering talent cohorts to transition into core tech roles.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Curriculum design</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Placement Prep</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Case studies</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Public Speaking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-gradient-to-b from-brand-dark/0 via-brand-card/30 to-brand-dark/0">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-gradient mb-4">Journey Highlights</h2>
+                <p class="text-slate-300 font-light">Snapshots from Google, global ventures, and international milestones.</p>
+            </div>
+
+            <!-- Carousel Frame -->
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+                <!-- Track Container -->
+                <div class="relative overflow-hidden w-full h-[320px] sm:h-[480px]">
+                    
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 flex flex-col md:flex-row bg-brand-card">
+                        <div class="w-full md:w-1/2 h-full relative">
+                            <img src="WhatsApp Image 2026-06-28 at 6.42.47 PM.jpeg" 
+                                 class="w-full h-full object-cover" 
+                                 alt="Sharon Suresh at Google"
+                                 onerror="this.src='https://placehold.co/600x800/030712/3b82f6?text=Sharon+at+Google'">
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center space-y-4">
+                            <span class="text-xs font-semibold text-brand-blue uppercase tracking-widest">Industry Leadership</span>
+                            <h3 class="text-2xl font-bold font-display text-white">Engineering Analyst at Google</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Driving enterprise-level relational insights, process optimisations, and modern analytical framework integrations inside a high-growth tech environment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 flex flex-col md:flex-row bg-brand-card">
+                        <div class="w-full md:w-1/2 h-full relative">
+                            <img src="WhatsApp Image 2026-06-28 at 6.36.22 PM.jpeg" 
+                                 class="w-full h-full object-cover" 
+                                 alt="Sharon Suresh in Dubai"
+                                 onerror="this.src='https://placehold.co/600x800/030712/8b5cf6?text=Global+Tech+Ventures'">
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center space-y-4">
+                            <span class="text-xs font-semibold text-brand-purple uppercase tracking-widest">Global Perspective</span>
+                            <h3 class="text-2xl font-bold font-display text-white">Ecosystem Dynamics</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Aligning localized teaching with dynamic, cross-regional market developments. Believer in solving tangible problems for global users.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 flex flex-col md:flex-row bg-brand-card">
+                        <div class="w-full md:w-1/2 h-full relative">
+                            <img src="WhatsApp Image 2026-06-28 at 6.36.21 PM.jpeg" 
+                                 class="w-full h-full object-cover" 
+                                 alt="Sharon Suresh Educator Profile"
+                                 onerror="this.src='https://placehold.co/600x800/030712/14b8a6?text=Mentoring+Impact'">
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center space-y-4">
+                            <span class="text-xs font-semibold text-brand-teal uppercase tracking-widest">Human Connection</span>
+                            <h3 class="text-2xl font-bold font-display text-white">Tech Met with Soul</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Bridging professional consulting with personalized mentoring. Committed to providing humanized coaching channels in a scalable AI era.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Navigation Controls -->
+                <button id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-card hover:bg-white/10 flex items-center justify-center text-white z-20 transition-all">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                <button id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-card hover:bg-white/10 flex items-center justify-center text-white z-20 transition-all">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+
+                <!-- Navigation Indicator Dots -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20" id="carousel-indicators-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="py-24">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-gradient mb-4">Milestone Roadmap</h2>
+                <p class="text-slate-300 font-light">Interactive tracking of corporate, foundational, and academic experiences.</p>
+            </div>
+
+            <!-- Tab Buttons Container -->
+            <div class="grid grid-cols-2 md:flex md:justify-center p-1 bg-white/5 border border-white/10 rounded-2xl md:rounded-full max-w-2xl mx-auto mb-12 gap-1">
+                <button onclick="changeTab('corporate')" id="tab-btn-corporate" class="tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full bg-brand-blue text-white transition-all">
+                    Corporate Analytics
+                </button>
+                <button onclick="changeTab('mentorship')" id="tab-btn-mentorship" class="tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full text-slate-400 hover:text-white transition-all">
+                    Founding & Mentoring
+                </button>
+                <button onclick="changeTab('academic')" id="tab-btn-academic" class="tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full text-slate-400 hover:text-white transition-all">
+                    Education
+                </button>
+                <button onclick="changeTab('early')" id="tab-btn-early" class="tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full text-slate-400 hover:text-white transition-all">
+                    Early Experience
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="space-y-12">
+                
+                <!-- Tab: Corporate Analytics -->
+                <div id="tab-content-corporate" class="tab-content block space-y-8 animate-fade-in">
+                    <!-- Google Experience -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="absolute -left-3 top-8 w-6 h-6 bg-brand-blue rounded-full border-4 border-brand-dark hidden md:block"></div>
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Engineering Analyst</h3>
+                                <div class="text-sm text-brand-blue font-semibold">Google • Full-Time</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Sep 2024 - Present</span>
+                        </div>
+                        <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                            <li>Leverage advanced analytics pipelines and database workflows to structure actionable, data-driven system insights.</li>
+                            <li>Utilize complex SQL (DQL, DDL) architectures alongside Python scripts to streamline automation and data engineering frameworks.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Groww Experience -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="absolute -left-3 top-8 w-6 h-6 bg-brand-blue rounded-full border-4 border-brand-dark hidden md:block"></div>
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Business Analyst</h3>
+                                <div class="text-sm text-brand-purple font-semibold">Groww, India • Full-Time</div>
+                            </div>
+                            <div class="flex flex-col items-end gap-1">
+                                <span class="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs text-brand-purple font-semibold">Jul 2022 - Sep 2024</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                            <li>Orchestrated end-to-end A/B tests and statistical hypothesis evaluations to smoothly implement new customer frameworks (e.g., DDPI).</li>
+                            <li>Conducted deep-dive root cause analyses (RCAs) for advanced stocks and derivative transactions (FnO).</li>
+                            <li>Monitored transaction logs to detect anomalies, successfully mitigating and flagging risk operations.</li>
+                            <li>Worked Extensively on SQL, Google Sheets, Python and Looker Studio.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tab: Education & Founding -->
+                <div id="tab-content-mentorship" class="tab-content hidden space-y-8 animate-fade-in">
+                    
+                    <!-- Global Automation Consulting -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-brand-blue/10 relative">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Global Automation & Workflow Projects</h3>
+                                <div class="text-sm text-brand-blue font-semibold">Consulting • International Collaborations</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Ongoing Projects</span>
+                        </div>
+                        <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                            <li>Partnered with a London-based Flow Engineer to optimize complex event-based systems, streamlining functional pipelines.</li>
+                            <li>Architected and implemented automation sequences for a prominent educational leader in the public sector in Australia to scale systemic knowledge distribution models.</li>
+                            <li>Synthesized modern technical toolchains (Python scripts, custom database tasks, flowcharts) to handle process integrations remotely.</li>
+                        </ul>
+                    </div>
+
+                    <!-- One Way Education -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Founder</h3>
+                                <div class="text-sm text-brand-teal font-semibold">One Way Education • Venture</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/20 text-xs text-brand-teal font-semibold">Jan 2026 - Present</span>
+                        </div>
+                        <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed mb-4">
+                            Built from the ground up to empower non-tech career transitioners, aspiring data analysts, and engineering candidates. Designed robust curriculum maps focusing on SQL query logic, Python development, and automated workspace tools.
+                        </p>
+                    </div>
+
+                    <!-- BITSoM / Other roles -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Guest Instructor & PM Mentor</h3>
+                                <div class="text-sm text-brand-blue font-semibold">BITSoM, IIT Patna, BITS Goa • Academic</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Ongoing Partnerships</span>
+                        </div>
+                        <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                            <li>Formulating customized technical bootcamps targeting advanced SQL logic, career development pipelines, and mock diagnostic interviews.</li>
+                            <li>External PM Mentor for BITSoM cohorts, advising on data management and product optimization frameworks.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Tab: Education -->
+                <div id="tab-content-academic" class="tab-content hidden space-y-8 animate-fade-in">
+                    
+                    <!-- BITS Pilani Goa Campus -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Birla Institute of Technology and Science, Pilani</h3>
+                                <div class="text-sm text-brand-teal font-semibold">Goa Campus • Dual Degree (B.E Chemical Engineering + M.Sc Biological Sciences)</div>
+                            </div>
+                            <div class="flex flex-col items-end text-right">
+                                <span class="px-3 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/20 text-xs text-brand-teal font-semibold">2017 – 2022</span>
+                                <span class="text-xs text-slate-400 font-bold mt-1">Grade: 8.1 CGPA</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-semibold text-brand-teal uppercase tracking-widest mb-3">Activities & Societies</div>
+                            <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                                <li><strong>Culinary Club:</strong> Co-founder, organizing collaborative cooking summits, community pop-ups, and operational activities.</li>
+                                <li><strong>180 Degrees Consulting (180DC):</strong> Senior Consultant & Project Lead, leading real-world diagnostic consulting client assignments with social organizations like IFLI, SEWA Bharat, and eVidyaloka.</li>
+                                <li><strong>Nirmaan:</strong> Event Head (JOGW) & Core member (Project Lamani), steering development programs and child-centric welfare projects.</li>
+                                <li><strong>Mime Club:</strong> Coordinating team member & core dramatic performer.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- St. Mary's School, Pune -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">St. Mary's School, Pune</h3>
+                                <div class="text-sm text-slate-400 font-semibold">Class 2 to Class 10</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300 font-semibold">Jun 2007 – Jun 2015</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">Activities & Societies</div>
+                            <ul class="space-y-3 text-slate-300 text-sm sm:text-base font-light pl-4 list-disc">
+                                <li><strong>School Choir:</strong> Core vocalist, performing regularly in choral meets and institutional programs.</li>
+                                <li><strong>Debating & Literary Forums:</strong> Represented school in selected inter-school essay competitions and debating assignments.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tab: Early Foundations -->
+                <div id="tab-content-early" class="tab-content hidden space-y-8 animate-fade-in">
+                    
+                    <!-- Porter Intern -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Business Analyst Intern</h3>
+                                <div class="text-sm text-brand-blue font-semibold">Porter • Internship</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-xs text-brand-blue font-semibold">Jan 2022 - Jun 2022</span>
+                        </div>
+                        <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+                            Worked on demand-side operations and logistics constraints. Utilized Python, SQL, and interactive Metabase dashboards to predict and present trends to key business leaders.
+                        </p>
+                    </div>
+
+                    <!-- Airmeet Intern -->
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-white/5 relative">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Business Development & Analyst Intern</h3>
+                                <div class="text-sm text-brand-purple font-semibold">Airmeet • Internship</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs text-brand-purple font-semibold">Jul 2021 - Jun 2022</span>
+                        </div>
+                        <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+                            Structured data-driven expansion strategies across global clusters (India, APAC, MENA). Handled pipeline metrics and automated tracking using HubSpot CRM and custom database analytics.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="arcade" class="py-20 bg-gradient-to-t from-brand-dark via-brand-card/20 to-brand-dark">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
+                <div class="relative z-10 text-center">
+                    <span class="text-xs font-bold text-brand-blue uppercase tracking-widest px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20">Arcade Experience</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-display text-gradient mt-4">Sharon's Automation Run</h2>
+                    <p class="text-slate-300 text-xs sm:text-sm mt-2 max-w-xl mx-auto">
+                        Control the <strong>"Optimization Hub"</strong> basket below. Capture structural workflow scripts while dodging database bottlenecks!
+                    </p>
+
+                    <!-- Game Screen Container -->
+                    <div class="relative mt-8 flex flex-col items-center arcade-scanlines rounded-2xl">
+                        <canvas id="game-canvas" width="600" height="350" class="w-full bg-brand-dark rounded-2xl border border-white/10 max-w-[600px] block"></canvas>
+                        
+                        <!-- Overlay menu UI panel inside the frame -->
+                        <div id="game-overlay" class="absolute inset-0 bg-brand-dark/95 flex flex-col items-center justify-center rounded-2xl transition-all gap-4">
+                            <h3 class="text-xl font-bold text-white font-display" id="game-status-text">Announcer System Ready</h3>
+                            <button id="launch-btn" onclick="startGameEngine()" class="px-6 py-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold text-sm hover:scale-105 transition-transform flex items-center gap-2 shadow-lg shadow-brand-blue/25">
+                                <i class="fa-solid fa-volume-high"></i> Launch & Synthesize Voice
+                            </button>
+                            <span class="text-[10px] text-slate-400">Announcer uses Gemini generative TTS! Wait for the countdown!</span>
+                        </div>
+
+                        <!-- Touch buttons for adaptivity -->
+                        <div class="flex items-center justify-center gap-6 mt-4 w-full max-w-[400px]">
+                            <button id="ctrl-left" class="flex-1 py-4 bg-white/5 border border-white/10 hover:bg-white/10 active:bg-brand-blue/20 text-white rounded-xl select-none flex items-center justify-center text-xl font-bold" aria-label="Move Left">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                            <button id="ctrl-right" class="flex-1 py-4 bg-white/5 border border-white/10 hover:bg-white/10 active:bg-brand-blue/20 text-white rounded-xl select-none flex items-center justify-center text-xl font-bold" aria-label="Move Right">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <p class="text-[10px] text-slate-500 mt-2">Use desktop Left/Right arrow keys or touch buttons to play.</p>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-white/5 text-left text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-teal-400 block"></span>
+                            <span class="text-slate-300">SQL (+10)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-blue-400 block"></span>
+                            <span class="text-slate-300">Python (+15)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-purple-400 block"></span>
+                            <span class="text-slate-300">Automation (+25)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500 block"></span>
+                            <span class="text-slate-300">Errors (-20)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-24 bg-gradient-to-t from-brand-dark/0 via-brand-card/20 to-brand-dark/0 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-white/10 shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="text-center mb-8">
+                        <span class="text-xs font-bold text-brand-blue uppercase tracking-widest px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20">Interactive Path Finder</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold font-display text-white mt-4">Which Sharon are you looking for?</h2>
+                        <p class="text-slate-300 text-sm mt-2">Pick an option below to simulate custom workflows or curriculum plans!</p>
+                    </div>
+
+                    <!-- Matcher Selection Buttons -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10" id="quiz-options">
+                        <button onclick="selectQuizOption('recruiter')" class="quiz-btn p-5 rounded-2xl border border-white/10 hover:border-brand-blue/50 bg-white/5 hover:bg-brand-blue/10 text-left transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-lg mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <h4 class="font-bold text-white font-display text-base">The Analyst & Consultant</h4>
+                            <p class="text-xs text-slate-400 mt-1">Want custom analytics strategies or deep product analytics logic.</p>
+                        </button>
+
+                        <button onclick="selectQuizOption('student')" class="quiz-btn p-5 rounded-2xl border border-white/10 hover:border-brand-purple/50 bg-white/5 hover:bg-brand-purple/10 text-left transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-brand-purple/10 flex items-center justify-center text-brand-purple text-lg mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h4 class="font-bold text-white font-display text-base">The Mentor & Educator</h4>
+                            <p class="text-xs text-slate-400 mt-1">Ready to learn SQL models, Python scripts, or Agentic AI.</p>
+                        </button>
+
+                        <button onclick="selectQuizOption('partner')" class="quiz-btn p-5 rounded-2xl border border-white/10 hover:border-brand-teal/50 bg-white/5 hover:bg-brand-teal/10 text-left transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-brand-teal/10 flex items-center justify-center text-brand-teal text-lg mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-handshake"></i>
+                            </div>
+                            <h4 class="font-bold text-white font-display text-base">The Venture Founder</h4>
+                            <p class="text-xs text-slate-400 mt-1">Looking to run corporate training modules or bootcamp programs.</p>
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Output Zone -->
+                    <div id="quiz-result" class="hidden p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 animate-fade-in">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue to-brand-purple flex-shrink-0 flex items-center justify-center text-white text-lg">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div class="space-y-3">
+                                <h3 class="text-lg font-bold text-white font-display" id="quiz-result-title">Suggested Track</h3>
+                                <p class="text-sm text-slate-300 leading-relaxed font-light" id="quiz-result-text"></p>
+                                <div class="pt-4 flex flex-wrap gap-3" id="quiz-result-ctas"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Interactive grid overlay backlights -->
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="connect" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left: Connect copy -->
+            <div class="lg:col-span-6 space-y-6">
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-gradient">Let's Connect & Solve</h2>
+                <p class="text-slate-300 font-light text-base sm:text-lg leading-relaxed">
+                    Have a problem statement that needs data structures? Want to conduct next-gen technical bootcamps for your company or college cohort? Or just fancy structured mental models on Prompt Engineering? Reach out today!
+                </p>
+                <p class="text-sm text-slate-400 font-normal leading-relaxed italic border-l-2 border-brand-purple pl-4">
+                    "Please reach out to me if you would like me to conduct corporate/ educational institute level sessions for you. My team and I would love to help. Feel free to ping even if you just want to chat :)"
+                </p>
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-center gap-4 text-slate-300">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-brand-blue">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <span class="text-sm">Bangalore & Pune, India (Hybrid / Remote Available)</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-slate-300">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-brand-blue">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <a href="mailto:sharonssuresh2@gmail.com" class="text-sm hover:text-brand-blue transition-colors font-medium">sharonssuresh2@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Dynamic Form & Channels Card -->
+            <div class="lg:col-span-6">
+                <div class="glass-card rounded-3xl p-8 border border-white/10 shadow-2xl space-y-6">
+                    <h3 class="text-xl font-bold font-display text-white">Direct Resources & Channels</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="https://sites.google.com/view/onewaylearning" target="_blank" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-blue/10 hover:border-brand-blue/30 transition-all flex flex-col space-y-2 group">
+                            <span class="text-xs font-semibold text-brand-blue">Core Portal</span>
+                            <span class="font-bold text-white text-sm group-hover:text-brand-blue transition-colors">One Way Learning ↗</span>
+                            <span class="text-xs text-slate-400">Track latest framework maps, bootcamps and workshop paths.</span>
+                        </a>
+
+                        <a href="https://promptly-yours.blogspot.com/" target="_blank" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-purple/10 hover:border-brand-purple/30 transition-all flex flex-col space-y-2 group">
+                            <span class="text-xs font-semibold text-brand-purple">Tech blog</span>
+                            <span class="font-bold text-white text-sm group-hover:text-brand-purple transition-colors">Promptly Yours ↗</span>
+                            <span class="text-xs text-slate-400">Discover direct tutorials on SQL structures and workflow tools.</span>
+                        </a>
+
+                        <a href="https://silicon-and-soul.blogspot.com/" target="_blank" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-teal/10 hover:border-brand-teal/30 transition-all flex flex-col space-y-2 group">
+                            <span class="text-xs font-semibold text-brand-teal">Insights blog</span>
+                            <span class="font-bold text-white text-sm group-hover:text-brand-teal transition-colors">Silicon & Soul ↗</span>
+                            <span class="text-xs text-slate-400">Read on how health meets tech and personal philosophy trends.</span>
+                        </a>
+
+                        <div onclick="triggerConsultation()" class="p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-brand-blue/10 hover:border-brand-blue/30 transition-all flex flex-col space-y-2 group cursor-pointer">
+                            <span class="text-xs font-semibold text-brand-blue">Collaboration</span>
+                            <span class="font-bold text-white text-sm group-hover:text-brand-blue transition-colors">Request a session ↗</span>
+                            <span class="text-xs text-slate-400">Invite Sharon for high-energy tech bootcamps or mentor programs.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Notification Toast Frame -->
+    <div id="toast-notif" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 max-w-sm glass-card border border-brand-blue/30 rounded-2xl p-4 shadow-xl flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="flex-1">
+            <p class="text-xs text-slate-400 font-medium">Notification</p>
+            <p class="text-sm text-slate-100 font-semibold" id="toast-text">Action received successfully!</p>
+        </div>
+    </div>
+
+    <footer class="border-t border-white/5 bg-brand-dark py-8 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="font-display font-medium text-slate-400">Sharon Suresh Portfolio &copy; 2026</div>
+            <div class="flex space-x-6 text-sm">
+                <a href="https://www.linkedin.com/in/sharon-suresh-795b7414a/" target="_blank" class="hover:text-brand-blue transition-colors" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#timeline" class="hover:text-brand-blue transition-colors">Journey Map</a>
+                <a href="https://sites.google.com/view/onewaylearning" target="_blank" class="hover:text-brand-blue transition-colors">One Way Learning</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Canvas Particle Animation Logic (Optimized for higher velocity speed) ---
+        const canvas = document.getElementById('ambient-canvas');
+        const ctx = canvas.getContext('2d');
+        let dots = [];
+        const maxDots = 55;
+
+        function resizeAmbientCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class StarNode {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                // Boosted velocities for faster animation rate as requested
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.r = Math.random() * 1.5 + 0.5;
+                this.opacity = Math.random() * 0.6 + 0.2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(139, 92, 246, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function initAmbientEngine() {
+            resizeAmbientCanvas();
+            dots = [];
+            for (let i = 0; i < maxDots; i++) {
+                dots.push(new StarNode());
+            }
+        }
+
+        function renderAmbientEngineLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].update();
+                dots[i].draw();
+                for (let j = i + 1; j < dots.length; j++) {
+                    const dist = Math.hypot(dots[i].x - dots[j].x, dots[i].y - dots[j].y);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(dots[i].x, dots[i].y);
+                        ctx.lineTo(dots[j].x, dots[j].y);
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.12 * (1 - dist/120)})`;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(renderAmbientEngineLoop);
+        }
+
+        window.addEventListener('resize', resizeAmbientCanvas);
+
+        // --- Custom Image Slideshow Carousel Controls ---
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentSlideIdx = 0;
+
+        function initCarousel() {
+            const container = document.getElementById('carousel-indicators-container');
+            container.innerHTML = '';
+            slides.forEach((_, idx) => {
+                const indicator = document.createElement('button');
+                indicator.className = `w-2 h-2 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-brand-blue w-6' : 'bg-slate-600'}`;
+                indicator.addEventListener('click', () => goToSlide(idx));
+                container.appendChild(indicator);
+            });
+        }
+
+        function updateCarouselIndicators() {
+            const indicators = document.querySelectorAll('#carousel-indicators-container button');
+            indicators.forEach((ind, idx) => {
+                if (idx === currentSlideIdx) {
+                    ind.className = 'w-2.5 h-2.5 rounded-full bg-brand-blue w-6 transition-all duration-300';
+                } else {
+                    ind.className = 'w-2 h-2 rounded-full bg-slate-600 transition-all duration-300';
+                }
+            });
+        }
+
+        function goToSlide(idx) {
+            slides[currentSlideIdx].classList.remove('opacity-100');
+            slides[currentSlideIdx].classList.add('opacity-0');
+            currentSlideIdx = (idx + slides.length) % slides.length;
+            slides[currentSlideIdx].classList.remove('opacity-0');
+            slides[currentSlideIdx].classList.add('opacity-100');
+            updateCarouselIndicators();
+        }
+
+        document.getElementById('carousel-next').addEventListener('click', () => goToSlide(currentSlideIdx + 1));
+        document.getElementById('carousel-prev').addEventListener('click', () => goToSlide(currentSlideIdx - 1));
+
+        // --- Mobile Responsiveness Dropdown Trigger ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // --- Milestone Timeline Tabbed Framework Switching ---
+        function changeTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full text-slate-400 hover:text-white transition-all";
+            });
+
+            document.getElementById(`tab-content-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            
+            if (tabId === 'corporate') {
+                activeBtn.className = "tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full bg-brand-blue text-white transition-all";
+            } else if (tabId === 'mentorship') {
+                activeBtn.className = "tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full bg-brand-purple text-white transition-all";
+            } else if (tabId === 'academic') {
+                activeBtn.className = "tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full bg-brand-teal text-white transition-all";
+            } else {
+                activeBtn.className = "tab-btn flex-1 py-2 text-xs sm:text-sm font-semibold rounded-xl md:rounded-full bg-slate-700 text-white transition-all";
+            }
+        }
+
+        // --- Interactive Role Matcher Decision-maker Wizard ---
+        function selectQuizOption(role) {
+            document.querySelectorAll('.quiz-btn').forEach(btn => {
+                btn.classList.remove('border-brand-blue/50', 'border-brand-purple/50', 'border-brand-teal/50', 'bg-white/10');
+            });
+
+            const resultContainer = document.getElementById('quiz-result');
+            const resultTitle = document.getElementById('quiz-result-title');
+            const resultText = document.getElementById('quiz-result-text');
+            const resultCtas = document.getElementById('quiz-result-ctas');
+
+            resultContainer.classList.remove('hidden');
+            resultCtas.innerHTML = '';
+
+            let matchedTitle = "";
+            let matchedText = "";
+            let customActions = [];
+
+            if (role === 'recruiter') {
+                matchedTitle = "Consultation Strategy & Business Insights Tracker";
+                matchedText = "For platforms or organizations looking for high-fidelity SQL optimization pipelines, user analytics structures, and end-to-end A/B tests. Let's design specialized dashboards matching your analytical workflows.";
+                customActions = [
+                    { label: "Request Consultation Session", action: triggerConsultation },
+                    { label: "Check Analytics Roadmap", link: "#timeline" }
+                ];
+            } else if (role === 'student') {
+                matchedTitle = "Personalized Technical Upskill Tracker";
+                matchedText = "For students or non-tech transitioners looking to master logical database structures and programmatic Python frameworks. We construct concrete case schemas (like the Masai SQL cohort paths) to get you industry-ready.";
+                customActions = [
+                    { label: "Browse Promptly Yours Blog ↗", link: "https://promptly-yours.blogspot.com/" },
+                    { label: "Open One Way Learning Hub ↗", link: "https://sites.google.com/view/onewaylearning" }
+                ];
+            } else {
+                matchedTitle = "Institutional Bootcamp Strategy Planner";
+                matchedText = "For colleges, business programs (IITs, BITSoM) looking to coordinate comprehensive workshops. From curriculum maps to interactive mock validation trials, my team and I build customized onboarding plans.";
+                customActions = [
+                    { label: "Request Workshop Plan", action: triggerConsultation },
+                    { label: "Explore Silicon & Soul Blog ↗", link: "https://silicon-and-soul.blogspot.com/" }
+                ];
+            }
+
+            resultTitle.textContent = matchedTitle;
+            resultText.textContent = matchedText;
+
+            customActions.forEach(btnObj => {
+                const btnNode = document.createElement('button');
+                btnNode.className = "px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white transition-all";
+                btnNode.textContent = btnObj.label;
+                if (btnObj.action) {
+                    btnNode.addEventListener('click', btnObj.action);
+                } else if (btnObj.link) {
+                    btnNode.addEventListener('click', () => window.open(btnObj.link, '_blank'));
+                }
+                resultCtas.appendChild(btnNode);
+            });
+        }
+
+        function triggerConsultation() {
+            const toast = document.getElementById('toast-notif');
+            const textNode = document.getElementById('toast-text');
+            textNode.textContent = "Inquiry noted! Sharon's team will touch base shortly.";
+            
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4500);
+        }
+
+        let audioCtx;
+        function initAudioEngine() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Native retro synth generator
+        function playSynthSound(type) {
+            try {
+                initAudioEngine();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                if (type === 'success') {
+                    // Fast high pitch bleep arpeggio
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5
+                    osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.16); // C6
+                    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'error') {
+                    // Buzz hit
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(40, audioCtx.currentTime + 0.25);
+                    gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.25);
+                } else if (type === 'gameover') {
+                    // Descending minor tune
+                    osc.type = 'triangle';
+                    const notes = [392.00, 349.23, 311.13, 261.63]; // G4, F4, Eb4, C4
+                    notes.forEach((freq, idx) => {
+                        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.15);
+                    });
+                    gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.7);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.7);
+                } else if (type === 'countdown') {
+                    // Standard short beep
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.1);
+                }
+            } catch(e) {
+                console.warn('Audio synthesis failed to initialize:', e);
+            }
+        }
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window
